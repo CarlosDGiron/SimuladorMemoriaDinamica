@@ -1,3 +1,5 @@
+package modelo;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -13,55 +15,55 @@ abstract class Persona {
     public Persona() {
     }
 
-    public String getNombres() {
+    protected String getNombres() {
         return nombres;
     }
 
-    public void setNombres(String nombres) {
+    protected void setNombres(String nombres) {
         this.nombres = nombres;
     }
 
-    public String getApellidos() {
+    protected String getApellidos() {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
+    protected void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 
-    public String getDireccion() {
+    protected String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
+    protected void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public String getFechaDeNacimiento() {
+    protected String getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(String fechaDeNacimiento) {
+    protected void setFechaDeNacimiento(String fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
-    public String getNumeroDeTelefono() {
+    protected String getNumeroDeTelefono() {
         return numeroDeTelefono;
     }
 
-    public void setNumeroDeTelefono(String numeroDeTelefono) {
+    protected void setNumeroDeTelefono(String numeroDeTelefono) {
         this.numeroDeTelefono = numeroDeTelefono;
     }
     
-    public void crear(){
+    protected void crear(){
     }
     
-    public void leer(){
+    protected void leer(){
     }
     
-    public void actualizar(){
+    protected void actualizar(){
     }
     
-    public void borrar(){
+    protected void borrar(){
     }
 }
