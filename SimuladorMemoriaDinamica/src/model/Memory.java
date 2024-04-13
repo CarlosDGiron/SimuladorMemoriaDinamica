@@ -12,12 +12,12 @@ import java.util.ArrayList;
  */
 public class Memory {
     ArrayList<MemoryBlock> memoryBlocks;
-    int currentInstant;
+    public int currentInstant;
     int freeSpaceInKilobytes;
     int sizeInKilobytes;
     int totalInternalFragmentationInKilobytes;    
    
-    Memory(int sizeInKilobytes){
+    public Memory(int sizeInKilobytes){
         this.currentInstant=0;
         this.sizeInKilobytes=sizeInKilobytes;
         this.freeSpaceInKilobytes=sizeInKilobytes;
@@ -25,7 +25,7 @@ public class Memory {
         memoryBlocks=new ArrayList<MemoryBlock>();
     }
     
-    public void fordwardInstant(int currentInstant){
+    public void fordwardInstant(){
         currentInstant++;
         this.totalInternalFragmentationInKilobytes=0;
         for(MemoryBlock iterator:memoryBlocks){
@@ -61,6 +61,7 @@ public class Memory {
     }
     
     public void insertProcessInMemoryBlock(Process newProcess, int memoryBlockId){
+        newProcess.initInstant=currentInstant;
         memoryBlocks.get(memoryBlockId).insertProcess(newProcess);
     }
    

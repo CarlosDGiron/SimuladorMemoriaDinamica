@@ -16,18 +16,18 @@ public class MemoryBlock {
     int internalFragmentationInKilobytes;
     ArrayList<Process> storedProcesses;
 
-    MemoryBlock(int id, int sizeInKilobytes) {
+    public MemoryBlock(int id, int sizeInKilobytes) {
         this.id = id;
         this.sizeInKilobytes = sizeInKilobytes;
         this.storedProcesses = new ArrayList<Process>();
         this.internalFragmentationInKilobytes=0;
     }
     public void updateinternalFragmentation(){
-        int spaceUsed=0;
+        int fragmentation=0;
         for(Process iterator:storedProcesses){
-            spaceUsed=+iterator.sizeInKylobytes;
+            fragmentation=+iterator.sizeInKylobytes;
         }
-        this.internalFragmentationInKilobytes = (sizeInKilobytes-spaceUsed);
+        this.internalFragmentationInKilobytes = (sizeInKilobytes-fragmentation);
     }
     
     public void insertProcess(Process newProcess){

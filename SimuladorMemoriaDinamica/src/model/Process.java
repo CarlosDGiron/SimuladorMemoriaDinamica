@@ -8,19 +8,20 @@ package model;
  *
  * @author cana0
  */
-class Process{
-    
+public class Process{
     int sizeInKylobytes;
     int id;
     String name;
     int initInstant;
+    public int arryvalInstant;
     int durationInInstants;
 
-    public Process(int id,int memoryUsageInKylobytes, String name, int initInstant, int durationInInstants) {
+    public Process(int id,int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants){
         this.id = id;
         this.sizeInKylobytes=memoryUsageInKylobytes;
         this.name = name;
-        this.initInstant = initInstant;
+        this.arryvalInstant = arryvalInstant;
         this.durationInInstants = durationInInstants;
+        this.initInstant=0;
     }          
 }
