@@ -32,7 +32,7 @@ public class Simulator {
     public void startSimulation(){
         this.checkSpaceForPendingProcess();
         memory.fordwardInstant();
-        saveMemoryInJson();
+        saveInJson();
     }
     
     public void checkSpaceForPendingProcess(){
@@ -46,7 +46,7 @@ public class Simulator {
         }
     }
     
-    public void saveMemoryInJson(){
+    public void saveInJson(){
      //TO DO agregar referencia metodo para guardar memoria actual en json enviando la memoria;
     }
     
