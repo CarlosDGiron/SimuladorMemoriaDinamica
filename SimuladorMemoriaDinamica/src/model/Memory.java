@@ -29,15 +29,18 @@ public class Memory {
         currentInstant++;
         this.totalInternalFragmentationInKilobytes=0;
         for(MemoryBlock iterator:memoryBlocks){
-            int currentIndex=memoryBlocks.indexOf(iterator.storedProcesses);
             iterator.fordwardInstant(currentInstant);
             totalInternalFragmentationInKilobytes=+iterator.internalFragmentationInKilobytes;
-            if(currentIndex>0){
-                if((memoryBlocks.get(currentIndex-1).storedProcesses.size()==0)&& iterator.storedProcesses.size()==0){
-                    memoryBlocks.get(currentIndex-1).sizeInKilobytes+=iterator.sizeInKilobytes;
-                    memoryBlocks.get(currentIndex-1).internalFragmentationInKilobytes+=iterator.internalFragmentationInKilobytes;
-                    memoryBlocks.remove(currentIndex);
-                }
+            mergeEmptyMemoryBlocks(memoryBlocks.indexOf(iterator.storedProcesses));
+        }
+    } 
+    
+    public void mergeEmptyMemoryBlocks(int indexOfCurrentBlock){
+        if(indexOfCurrentBlock>0){
+            if((memoryBlocks.get(indexOfCurrentBlock-1).storedProcesses.size()==0)&& memoryBlocks.get(indexOfCurrentBlock).storedProcesses.size()==0){
+                memoryBlocks.get(indexOfCurrentBlock-1).sizeInKilobytes+=memoryBlocks.get(indexOfCurrentBlock).sizeInKilobytes;
+                memoryBlocks.get(indexOfCurrentBlock-1).internalFragmentationInKilobytes+=memoryBlocks.get(indexOfCurrentBlock).internalFragmentationInKilobytes;
+                memoryBlocks.remove(indexOfCurrentBlock);
             }
         }
     }
