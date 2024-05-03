@@ -23,31 +23,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="236" max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel2" max="32767" attributes="0"/>
-                  <Component id="tamañoMemoria" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnNuevaSimulacion" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCargarJSON" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="12" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnNuevaSimulacion" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tamañoMemoria" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="308" max="32767" attributes="0"/>
+              <Component id="btnCargarJSON" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,20 +58,23 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Simulador de Memoria Dinamica"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JButton" name="btnCargarJSON">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingrese el tama&#xf1;o de la memoria:"/>
+        <Property name="text" type="java.lang.String" value="Cargar Simulaci&#xf3;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tama&#xf1;oMemoria">
+    <Component class="javax.swing.JButton" name="btnNuevaSimulacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tama&#xf1;o en KB"/>
+        <Property name="text" type="java.lang.String" value="Nueva Simulaci&#xf3;n"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tama&#xf1;oMemoriaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevaSimulacionActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

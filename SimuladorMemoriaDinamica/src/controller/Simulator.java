@@ -18,7 +18,7 @@ import model.*;
  * @author cana0
  */
 public class Simulator {
-    Memory memory;
+    public Memory memory;
     String simulationSaveFileName;
     ArrayList<Memory> memoryInstantList;
     ArrayList<model.Process> pendingProcessList;
