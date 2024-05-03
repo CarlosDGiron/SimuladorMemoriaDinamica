@@ -12,9 +12,9 @@ import java.util.ArrayList;
  */
 public class MemoryBlock {
     int id;
-    int sizeInKilobytes;
+    public int sizeInKilobytes;
     int internalFragmentationInKilobytes;
-    ArrayList<Process> storedProcesses;
+    public ArrayList<Process> storedProcesses;
 
     public MemoryBlock(int id, int sizeInKilobytes) {
         this.id = id;

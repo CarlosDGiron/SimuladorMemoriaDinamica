@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * @author cana0
  */
 public class Memory {
-    ArrayList<MemoryBlock> memoryBlocks;
+    public ArrayList<MemoryBlock> memoryBlocks;
     public int currentInstant;
-    int freeSpaceInKilobytes;
-    int sizeInKilobytes;
-    int totalInternalFragmentationInKilobytes;    
+    public int freeSpaceInKilobytes;
+    public int sizeInKilobytes;
+    public int totalInternalFragmentationInKilobytes;    
    
     public Memory(int sizeInKilobytes){
         this.currentInstant=0;
@@ -64,5 +64,5 @@ public class Memory {
         newProcess.initInstant=currentInstant;
         memoryBlocks.get(memoryBlockId).insertProcess(newProcess);
     }
-   
+  
 }
