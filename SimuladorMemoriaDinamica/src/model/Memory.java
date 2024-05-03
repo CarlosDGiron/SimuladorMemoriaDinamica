@@ -28,14 +28,16 @@ public class Memory {
     }
 
     public void fordwardInstant() {
+        currentInstant++;
         System.out.println("Instante: " + this.currentInstant);
+        System.out.println("Memoria Libre: " + this.freeSpaceInKilobytes);
+        System.out.println("Fragmentacion total:"+this.totalInternalFragmentationInKilobytes);
         this.totalInternalFragmentationInKilobytes = 0;
         for (MemoryBlock iterator : memoryBlocks) {
             iterator.fordwardInstant(currentInstant);
-            totalInternalFragmentationInKilobytes = +iterator.internalFragmentationInKilobytes;
+            totalInternalFragmentationInKilobytes +=iterator.internalFragmentationInKilobytes;
         }
         mergeEmptyMemoryBlocks();
-        currentInstant++;
     }
 
     public void mergeEmptyMemoryBlocks() {
@@ -46,9 +48,8 @@ public class Memory {
             if (currentIndex > 0 && memoryBlocks.get(currentIndex - 1).storedProcesses.isEmpty() && currentBlock.storedProcesses.isEmpty()) {
                 MemoryBlock previousBlock = memoryBlocks.get(currentIndex - 1);
                 previousBlock.sizeInKilobytes += currentBlock.sizeInKilobytes;
-                previousBlock.internalFragmentationInKilobytes += currentBlock.internalFragmentationInKilobytes;
+                previousBlock.internalFragmentationInKilobytes = previousBlock.sizeInKilobytes;
                 iterator.remove();
-                System.out.println("Removed: " + currentIndex);
             }
         }
     }
@@ -56,20 +57,20 @@ public class Memory {
     public Boolean insertProcess(Process newProcess) {
         Boolean newProcessIsStored = false;
         newProcess.initInstant=currentInstant;
-        if (newProcess.sizeInKylobytes <= freeSpaceInKilobytes) {
-            addMemoryBlock(newProcess);
-            newProcessIsStored = true;
-        } else {
-            if (newProcess.sizeInKylobytes <= totalInternalFragmentationInKilobytes) {
-                for (MemoryBlock iterator : memoryBlocks) {
-                    if (newProcess.sizeInKylobytes <= iterator.internalFragmentationInKilobytes) {
-                        insertProcessInMemoryBlock(newProcess, memoryBlocks.indexOf(iterator));
-                        newProcessIsStored = true;
-                        break;
-                    }
+        System.out.println(totalInternalFragmentationInKilobytes-newProcess.sizeInKylobytes);
+        if (newProcess.sizeInKylobytes <= totalInternalFragmentationInKilobytes) {
+            for (MemoryBlock iterator : memoryBlocks) {
+                if (newProcess.sizeInKylobytes <= iterator.internalFragmentationInKilobytes) {
+                    insertProcessInMemoryBlock(newProcess, memoryBlocks.indexOf(iterator));
+                    newProcessIsStored = true;
+                    break;
                 }
             }
+        }else if (newProcess.sizeInKylobytes <= freeSpaceInKilobytes) {
+            addMemoryBlock(newProcess);
+            newProcessIsStored = true;
         }
+        
         return newProcessIsStored;
     }
 

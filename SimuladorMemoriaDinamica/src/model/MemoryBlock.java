@@ -33,21 +33,24 @@ public class MemoryBlock {
     
     public void insertProcess(Process newProcess){
         storedProcesses.add(newProcess);
+        updateinternalFragmentation();
     }
     
     public void fordwardInstant(int currentInstant){
-        System.out.println("ID: "+this.id);        
-        System.out.println("Tamaño de Bloque: "+this.sizeInKilobytes);
-        System.out.println("Fragmentación Interna: "+this.internalFragmentationInKilobytes);
+        System.out.println("\tID: "+this.id);        
+        System.out.println("\tTamano de Bloque: "+this.sizeInKilobytes);
+        System.out.println("\tFragmentacion Interna: "+this.internalFragmentationInKilobytes);
         Iterator<Process> iterator = storedProcesses.iterator();
         while (iterator.hasNext()){
             Process iteratorProcess = iterator.next();
-            System.out.println("Process:"+iteratorProcess.name+" Cancel:"+String.valueOf((iteratorProcess.durationInInstants + iteratorProcess.initInstant) == currentInstant));
+            System.out.println("\t\tProcess:"+iteratorProcess.name+" Cancel:"+String.valueOf((iteratorProcess.durationInInstants + iteratorProcess.initInstant) == currentInstant));
             if ((iteratorProcess.durationInInstants + iteratorProcess.initInstant) == currentInstant) {
                 iterator.remove();
             }
         }
         this.updateinternalFragmentation();
+        
+        System.out.println();
     }
     
     

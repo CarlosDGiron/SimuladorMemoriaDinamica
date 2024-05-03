@@ -37,9 +37,6 @@ public class Simulator {
         long dt = Date.parse(formatString);
         return String.valueOf(dt);
     }
-    public Simulator(){
-        pendingProcessList=new ArrayList<model.Process>();
-    }
     
     public void addProcess(int id, int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants){
         model.Process newProcess= new model.Process(id, memoryUsageInKylobytes, name, arryvalInstant, durationInInstants);
@@ -48,8 +45,10 @@ public class Simulator {
     
     public void simulate(){
         Memory  iterator= new Memory(0);
+        
         checkSpaceForPendingProcess();
         memory.fordwardInstant();
+        checkSpaceForPendingProcess();
         iterator=memory;
         memoryInstantList.add(iterator);
         if(memory.isEmpty()){
@@ -68,12 +67,14 @@ public class Simulator {
     }
     
     public void checkSpaceForPendingProcess(){
+        
         Iterator<model.Process> iterator = pendingProcessList.iterator();
         while (iterator.hasNext()) {
             model.Process pendingProcess = iterator.next();
             if (memory.currentInstant >= pendingProcess.arryvalInstant) {
-                memory.insertProcess(pendingProcess);
+                if(memory.insertProcess(pendingProcess)){
                 iterator.remove();
+                }
             }
         }
     }
