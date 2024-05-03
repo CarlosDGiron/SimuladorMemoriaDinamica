@@ -19,7 +19,7 @@ public class main {
         sim.addProcess(2, 4000, "B", 2,2);
         sim.addProcess(3, 12000, "C",3, 6);
         sim.addProcess(4, 10000, "D", 4, 4);
-        sim.addProcess(5, 8000, "E", 5, 6);
+        sim.addProcess(5, 8000, "E", 5, 5);
         sim.addProcess(6, 14000, "F", 6, 5);
         sim.simulate();
     }

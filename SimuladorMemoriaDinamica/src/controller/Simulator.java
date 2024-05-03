@@ -14,7 +14,7 @@ import java.util.Iterator;
 import model.*;
 
 /**
- *
+ *a
  * @author cana0
  */
 public class Simulator {
@@ -43,9 +43,8 @@ public class Simulator {
         this.pendingProcessList.add(newProcess);
     }
     
-    public void simulate(){
+    public boolean simulate(){
         Memory  iterator= new Memory(0);
-        
         checkSpaceForPendingProcess();
         memory.fordwardInstant();
         checkSpaceForPendingProcess();
@@ -53,12 +52,13 @@ public class Simulator {
         memoryInstantList.add(iterator);
         if(memory.isEmpty()){
             if(!pendingProcessList.isEmpty()){
-                simulate();
+                return true;
             }else{
                 saveInJson();
+                return false;
             }
         }else{
-            simulate();
+            return true;
         }
     }
     
