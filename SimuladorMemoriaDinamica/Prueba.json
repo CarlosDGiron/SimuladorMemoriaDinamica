@@ -1,0 +1,321 @@
+[
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  },
+  {
+    "memoryBlocks": [
+      {
+        "id": 0,
+        "sizeInKilobytes": 2000,
+        "internalFragmentationInKilobytes": 0,
+        "storedProcesses": [
+          {
+            "sizeInKylobytes": 2000,
+            "id": 0,
+            "name": "SO",
+            "initInstant": 0,
+            "arryvalInstant": 0,
+            "durationInInstants": -1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "sizeInKilobytes": 50000,
+        "internalFragmentationInKilobytes": 50000,
+        "storedProcesses": []
+      }
+    ],
+    "currentInstant": 11,
+    "freeSpaceInKilobytes": 20000,
+    "sizeInKilobytes": 72000,
+    "totalInternalFragmentationInKilobytes": 50000
+  }
+]

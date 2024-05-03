@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -32,14 +33,34 @@ public class MemoryBlock {
     
     public void insertProcess(Process newProcess){
         storedProcesses.add(newProcess);
+        updateinternalFragmentation();
     }
     
     public void fordwardInstant(int currentInstant){
-        for(Process iterator:storedProcesses){
-            if((iterator.durationInInstants+iterator.initInstant)==currentInstant){
-                storedProcesses.remove(iterator);
+        System.out.println("\tID: "+this.id);        
+        System.out.println("\tTamano de Bloque: "+this.sizeInKilobytes);
+        System.out.println("\tFragmentacion Interna: "+this.internalFragmentationInKilobytes);
+        Iterator<Process> iterator = storedProcesses.iterator();
+        while (iterator.hasNext()){
+            Process iteratorProcess = iterator.next();
+            System.out.println("\t\tProcess:"+iteratorProcess.name+" Cancel:"+String.valueOf((iteratorProcess.durationInInstants + iteratorProcess.initInstant) == currentInstant));
+            if ((iteratorProcess.durationInInstants + iteratorProcess.initInstant) == currentInstant) {
+                iterator.remove();
             }
         }
         this.updateinternalFragmentation();
+        
+        System.out.println();
+    }
+    
+    
+    public boolean isEmpty(){
+        boolean isEmpty=true;
+        for(Process iterator:storedProcesses){
+            if(!iterator.name.equals("SO")){
+                isEmpty=false;
+            }
+        }
+        return isEmpty;
     }
 }
