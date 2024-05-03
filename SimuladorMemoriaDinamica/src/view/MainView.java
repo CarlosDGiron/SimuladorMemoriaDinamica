@@ -160,8 +160,6 @@ public class MainView extends javax.swing.JFrame {
     }
 
     public void PopUpAgregarProceso(Simulator simulator, DefaultTableModel model) {
-        
-        
 
         model.addColumn("ID");
         model.addColumn("Memoria KB");
@@ -174,7 +172,7 @@ public class MainView extends javax.swing.JFrame {
         ventana.setTitle("Agregar Proceso");
         ventana.setSize(500, 500);
         ventana.setLayout(null);
-        
+
         lbTabla = new JLabel("Tabla de procesos:");
         lbTabla.setBounds(20, 270, 130, 20);
         ventana.getContentPane().add(lbTabla);
@@ -228,7 +226,7 @@ public class MainView extends javax.swing.JFrame {
         btnAgregarProceso.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 agregarProceso(simulator);
-                
+
                 int opcion = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro proceso?", "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (opcion == JOptionPane.YES_OPTION) {
                     tfID.setText("");
@@ -239,7 +237,7 @@ public class MainView extends javax.swing.JFrame {
                 } else {
                     ventana.dispose();
                 }
-                
+
             }
         });
     }
