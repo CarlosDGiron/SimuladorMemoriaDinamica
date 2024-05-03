@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import model.*;
 
 /**
@@ -25,7 +26,7 @@ public class Simulator {
     
     public Simulator(int memorySizeInKilobytes){
         memory=new Memory(memorySizeInKilobytes);
-        simulationSaveFileName=getDateTime()+".json";
+        simulationSaveFileName="Prueba.json";
         memoryInstantList = new ArrayList<model.Memory>();
         pendingProcessList = new ArrayList<model.Process>();
         gson = new GsonBuilder().setPrettyPrinting().create();
@@ -46,8 +47,8 @@ public class Simulator {
     }
     
     public void simulate(){
-        Memory  iterator;
-        this.checkSpaceForPendingProcess();
+        Memory  iterator= new Memory(0);
+        checkSpaceForPendingProcess();
         memory.fordwardInstant();
         iterator=memory;
         memoryInstantList.add(iterator);
@@ -67,12 +68,12 @@ public class Simulator {
     }
     
     public void checkSpaceForPendingProcess(){
-        if(!pendingProcessList.isEmpty()){
-            for(model.Process iterator:pendingProcessList){
-                if(memory.currentInstant>=iterator.arryvalInstant){
-                    memory.insertProcess(iterator);
-                    pendingProcessList.remove(iterator);
-                }
+        Iterator<model.Process> iterator = pendingProcessList.iterator();
+        while (iterator.hasNext()) {
+            model.Process pendingProcess = iterator.next();
+            if (memory.currentInstant >= pendingProcess.arryvalInstant) {
+                memory.insertProcess(pendingProcess);
+                iterator.remove();
             }
         }
     }

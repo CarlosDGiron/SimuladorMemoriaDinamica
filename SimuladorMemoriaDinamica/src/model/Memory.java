@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -27,28 +28,34 @@ public class Memory {
     }
 
     public void fordwardInstant() {
-        currentInstant++;
+        System.out.println("Instante: " + this.currentInstant);
         this.totalInternalFragmentationInKilobytes = 0;
         for (MemoryBlock iterator : memoryBlocks) {
             iterator.fordwardInstant(currentInstant);
             totalInternalFragmentationInKilobytes = +iterator.internalFragmentationInKilobytes;
-            mergeEmptyMemoryBlocks(memoryBlocks.indexOf(iterator.storedProcesses));
         }
+        mergeEmptyMemoryBlocks();
+        currentInstant++;
     }
 
-    public void mergeEmptyMemoryBlocks(int indexOfCurrentBlock) {
-        if (indexOfCurrentBlock > 0) {
-            if ((memoryBlocks.get(indexOfCurrentBlock - 1).storedProcesses.isEmpty()) 
-                && memoryBlocks.get(indexOfCurrentBlock).storedProcesses.isEmpty()) {
-                memoryBlocks.get(indexOfCurrentBlock - 1).sizeInKilobytes += memoryBlocks.get(indexOfCurrentBlock).sizeInKilobytes;
-                memoryBlocks.get(indexOfCurrentBlock - 1).internalFragmentationInKilobytes += memoryBlocks.get(indexOfCurrentBlock).internalFragmentationInKilobytes;
-                memoryBlocks.remove(indexOfCurrentBlock);
+    public void mergeEmptyMemoryBlocks() {
+        Iterator<MemoryBlock> iterator = memoryBlocks.iterator();
+        while (iterator.hasNext()) {
+            MemoryBlock currentBlock = iterator.next();
+            int currentIndex = memoryBlocks.indexOf(currentBlock);
+            if (currentIndex > 0 && memoryBlocks.get(currentIndex - 1).storedProcesses.isEmpty() && currentBlock.storedProcesses.isEmpty()) {
+                MemoryBlock previousBlock = memoryBlocks.get(currentIndex - 1);
+                previousBlock.sizeInKilobytes += currentBlock.sizeInKilobytes;
+                previousBlock.internalFragmentationInKilobytes += currentBlock.internalFragmentationInKilobytes;
+                iterator.remove();
+                System.out.println("Removed: " + currentIndex);
             }
         }
     }
 
     public Boolean insertProcess(Process newProcess) {
         Boolean newProcessIsStored = false;
+        newProcess.initInstant=currentInstant;
         if (newProcess.sizeInKylobytes <= freeSpaceInKilobytes) {
             addMemoryBlock(newProcess);
             newProcessIsStored = true;
