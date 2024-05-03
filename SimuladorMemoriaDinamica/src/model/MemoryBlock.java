@@ -42,4 +42,14 @@ public class MemoryBlock {
         }
         this.updateinternalFragmentation();
     }
+    
+    public boolean isEmpty(){
+        boolean isEmpty=true;
+        for(Process iterator:storedProcesses){
+            if(!iterator.name.equals("SO")){
+                isEmpty=false;
+            }
+        }
+        return isEmpty;
+    }
 }

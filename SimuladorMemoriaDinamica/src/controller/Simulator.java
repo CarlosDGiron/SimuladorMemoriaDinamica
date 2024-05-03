@@ -4,7 +4,12 @@
  */
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import model.*;
 
 /**
@@ -13,13 +18,24 @@ import model.*;
  */
 public class Simulator {
     Memory memory;
+    String simulationSaveFileName;
+    ArrayList<Memory> memoryInstantList;
     ArrayList<model.Process> pendingProcessList;
+    Gson gson;
     
     public Simulator(int memorySizeInKilobytes){
         memory=new Memory(memorySizeInKilobytes);
-        pendingProcessList=new ArrayList<model.Process>();
+        simulationSaveFileName=getDateTime()+".json";
+        memoryInstantList = new ArrayList<model.Memory>();
+        pendingProcessList = new ArrayList<model.Process>();
+        gson = new GsonBuilder().setPrettyPrinting().create();
     }
     
+    public String getDateTime(){
+        String formatString = "yyyyMMddHHmmss";
+        long dt = Date.parse(formatString);
+        return String.valueOf(dt);
+    }
     public Simulator(){
         pendingProcessList=new ArrayList<model.Process>();
     }
@@ -29,10 +45,25 @@ public class Simulator {
         this.pendingProcessList.add(newProcess);
     }
     
-    public void startSimulation(){
+    public void simulate(){
+        Memory  iterator;
         this.checkSpaceForPendingProcess();
         memory.fordwardInstant();
-        saveInJson();
+        iterator=memory;
+        memoryInstantList.add(iterator);
+        if(memory.isEmpty()){
+            if(!pendingProcessList.isEmpty()){
+                simulate();
+            }else{
+                saveInJson();
+            }
+        }else{
+            simulate();
+        }
+    }
+    
+    public void addSO(int soMemorySizeInKilobytes){
+        addProcess(0,soMemorySizeInKilobytes,"SO",0,-1);
     }
     
     public void checkSpaceForPendingProcess(){
@@ -46,13 +77,12 @@ public class Simulator {
         }
     }
     
-    public void saveInJson(){
-     //TO DO agregar referencia metodo para guardar memoria actual en json enviando la memoria;
+    public void saveInJson(){     
+        String json = gson.toJson(memoryInstantList);
+        try (FileWriter writer = new FileWriter(this.simulationSaveFileName)) {
+            writer.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    
-    public void loadFromJson(int memorySizInKilobytes, ArrayList<model.Process> jsonListOfProcesses){
-        memory=new Memory(memorySizInKilobytes);
-        this.pendingProcessList=jsonListOfProcesses;
-    }
-    
 }
