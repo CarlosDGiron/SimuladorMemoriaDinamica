@@ -4,6 +4,7 @@
  */
 package model;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -62,5 +63,19 @@ public class MemoryBlock {
             }
         }
         return isEmpty;
+    }
+    
+    public String toJson(){
+        String json="{\"id\":\""+this.id+"\",\"sizeInKilobytes\":\""+this.sizeInKilobytes+"\",\"internalFragmentationInKilobytes\":\""+this.internalFragmentationInKilobytes+"\",\"storedProcesses\":[";
+        Iterator<Process> iterator=storedProcesses.iterator();
+        while(iterator.hasNext()){
+            Process processIterator=iterator.next();
+            json=json+processIterator.toJson();
+            if(iterator.hasNext()){
+                json=json+",";
+            }
+        }
+        json=json+"]}";
+        return json;
     }
 }

@@ -243,13 +243,12 @@ public class MainView extends javax.swing.JFrame {
     }
 
     private void agregarProceso(Simulator simulator) {
-        int id = Integer.parseInt(tfID.getText());
         int memoria = Integer.parseInt(tfMemoria.getText());
         String nombre = tfNombre.getText();
         int instante = Integer.parseInt(tfInstante.getText());
         int duracion = Integer.parseInt(tfDuracion.getText());
-        simulator.addProcess(id, memoria, nombre, instante, duracion);
-        model.addRow(new Object[]{id, memoria, nombre, instante, duracion});
+        simulator.addProcess(memoria, nombre, instante, duracion);
+        model.addRow(new Object[]{memoria, nombre, instante, duracion});
         repaint();
     }
 

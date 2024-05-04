@@ -94,8 +94,21 @@ public class Memory {
         return isEmpty;
     }
     
+    public void addSO(Process so){
+        insertProcess(so);
+    }
     public String toJson(){
-    String memoryJson=null;
-    return memoryJson;
+    String json="{\"currentInstant\":\""+this.currentInstant+"\",\"sizeInKilobytes\":\""+this.sizeInKilobytes+"\",\"freeSpaceInKilobytes\":\""+this.freeSpaceInKilobytes+"\",\"totalInternalFragmentationInKilobytes\":\""+this.totalInternalFragmentationInKilobytes+"\",\"memoryBlocks\":[";
+    Iterator<MemoryBlock> iterator=memoryBlocks.iterator();
+        while(iterator.hasNext()){
+            MemoryBlock memoryBlockIterator=iterator.next();
+            json=json+memoryBlockIterator.toJson();
+            if(iterator.hasNext()){
+                json=json+",";
+            }
+        }
+        json=json+"]}";
+    
+    return json;
     }
 }

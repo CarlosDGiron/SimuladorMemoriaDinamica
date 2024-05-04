@@ -11,18 +11,21 @@ package model;
 public class Process {
 
     public int sizeInKylobytes;
-    public int id;
     String name;
     public int initInstant;
     public int arryvalInstant;
     int durationInInstants;
 
-    public Process(int id, int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants) {
-        this.id = id;
+    public Process(int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants) {
         this.sizeInKylobytes = memoryUsageInKylobytes;
         this.name = name;
         this.arryvalInstant = arryvalInstant;
         this.durationInInstants = durationInInstants;
         this.initInstant = 0;
+    }
+
+    public String toJson() {
+        String json = "{\"sizeInKilobytes\":\"" + this.sizeInKylobytes + "\",\"name\":\"" + this.name + "\",\"initInstant\":\"" + this.initInstant + "\",\"arryvalInstant\":\"" + this.arryvalInstant + "\",\"durationInInstants\":\"" + this.durationInInstants + "\"}";
+        return json;
     }
 }

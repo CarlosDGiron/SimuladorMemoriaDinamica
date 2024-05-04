@@ -22,14 +22,14 @@ public class Simulator {
     String simulationSaveFileName;
     ArrayList<Memory> memoryInstantList;
     ArrayList<model.Process> pendingProcessList;
-    Gson gson;
+    String jsonData;
     
     public Simulator(int memorySizeInKilobytes){
         memory=new Memory(memorySizeInKilobytes);
         simulationSaveFileName="Prueba.json";
         memoryInstantList = new ArrayList<model.Memory>();
         pendingProcessList = new ArrayList<model.Process>();
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        jsonData="[";
     }
     
     public String getDateTime(){
@@ -38,8 +38,8 @@ public class Simulator {
         return String.valueOf(dt);
     }
     
-    public void addProcess(int id, int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants){
-        model.Process newProcess= new model.Process(id, memoryUsageInKylobytes, name, arryvalInstant, durationInInstants);
+    public void addProcess( int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants){
+        model.Process newProcess= new model.Process(memoryUsageInKylobytes, name, arryvalInstant, durationInInstants);
         this.pendingProcessList.add(newProcess);
     }
     
@@ -52,18 +52,23 @@ public class Simulator {
         memoryInstantList.add(iterator);
         if(memory.isEmpty()){
             if(!pendingProcessList.isEmpty()){
+                jsonData=","+jsonData+memory.toJson();
                 return true;
             }else{
+                jsonData=","+jsonData+memory.toJson()+"]";
                 saveInJson();
                 return false;
             }
         }else{
+            jsonData=","+jsonData+memory.toJson();
             return true;
         }
     }
     
     public void addSO(int soMemorySizeInKilobytes){
-        addProcess(0,soMemorySizeInKilobytes,"SO",0,-1);
+        model.Process so=new model.Process(soMemorySizeInKilobytes,"SO",0,-1);
+        memory.addSO(so);
+        jsonData=jsonData+memory.toJson();
     }
     
     public void checkSpaceForPendingProcess(){
@@ -80,9 +85,8 @@ public class Simulator {
     }
     
     public void saveInJson(){     
-        String json = gson.toJson(memoryInstantList);
         try (FileWriter writer = new FileWriter(this.simulationSaveFileName)) {
-            writer.write(json);
+            writer.write(jsonData);
         } catch (IOException e) {
             e.printStackTrace();
         }
