@@ -23,4 +23,9 @@ public class Process {
         this.durationInInstants = durationInInstants;
         this.initInstant = 0;
     }
+
+    public String toJson() {
+        String json = "{\"sizeInKilobytes\":\"" + this.sizeInKylobytes + "\",\"name\":\"" + this.name + "\",\"initInstant\":\"" + this.initInstant + "\",\"arryvalInstant\":\"" + this.arryvalInstant + "\",\"durationInInstants\":\"" + this.durationInInstants + "\"}";
+        return json;
+    }
 }
