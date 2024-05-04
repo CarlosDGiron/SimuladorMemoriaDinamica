@@ -32,14 +32,15 @@ public class Simulator {
         gson = new GsonBuilder().setPrettyPrinting().create();
     }
     
+    
     public String getDateTime(){
         String formatString = "yyyyMMddHHmmss";
         long dt = Date.parse(formatString);
         return String.valueOf(dt);
     }
     
-    public void addProcess(int id, int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants){
-        model.Process newProcess= new model.Process(id, memoryUsageInKylobytes, name, arryvalInstant, durationInInstants);
+    public void addProcess(int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants){
+        model.Process newProcess= new model.Process(memoryUsageInKylobytes, name, arryvalInstant, durationInInstants);
         this.pendingProcessList.add(newProcess);
     }
     
@@ -63,7 +64,7 @@ public class Simulator {
     }
     
     public void addSO(int soMemorySizeInKilobytes){
-        addProcess(0,soMemorySizeInKilobytes,"SO",0,-1);
+        addProcess(soMemorySizeInKilobytes,"SO",0,-1);
     }
     
     public void checkSpaceForPendingProcess(){

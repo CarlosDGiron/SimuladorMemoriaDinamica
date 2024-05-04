@@ -11,14 +11,12 @@ package model;
 public class Process {
 
     public int sizeInKylobytes;
-    public int id;
-    String name;
+    public String name;
     public int initInstant;
     public int arryvalInstant;
     int durationInInstants;
 
-    public Process(int id, int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants) {
-        this.id = id;
+    public Process(int memoryUsageInKylobytes, String name, int arryvalInstant, int durationInInstants) {
         this.sizeInKylobytes = memoryUsageInKylobytes;
         this.name = name;
         this.arryvalInstant = arryvalInstant;

@@ -54,7 +54,7 @@ public class MemoryAllocationSimulator extends JFrame {
             memoryBlocksPane.add(memoryBlockLabel);
 
             for (Process process : memoryBlock.storedProcesses) {
-                JLabel processLabel = new JLabel("Process ID: " + process.id + " - Size: "
+                JLabel processLabel = new JLabel("Nombre Proceso: " + process.name + " - Size: "
                         + process.sizeInKylobytes + "KB - Init Instant: " + process.initInstant);
                 memoryBlocksPane.add(processLabel);
             }
@@ -77,12 +77,12 @@ public class MemoryAllocationSimulator extends JFrame {
             public void run() {
                 Simulator sim = new Simulator(72000);
                 sim.addSO(2000);
-                sim.addProcess(1, 16000, "A", 1, 5);
-                sim.addProcess(2, 4000, "B", 2, 2);
-                sim.addProcess(3, 12000, "C", 3, 6);
-                sim.addProcess(4, 10000, "D", 4, 4);
-                sim.addProcess(5, 8000, "E", 5, 5);
-                sim.addProcess(6, 14000, "F", 6, 5);
+                sim.addProcess(16000, "A", 1, 5);
+                sim.addProcess(4000, "B", 2, 2);
+                sim.addProcess(12000, "C", 3, 6);
+                sim.addProcess(10000, "D", 4, 4);
+                sim.addProcess(8000, "E", 5, 5);
+                sim.addProcess(14000, "F", 6, 5);
                 sim.simulate();
                 new MemoryAllocationSimulator();
             }

@@ -23,18 +23,19 @@ import javax.swing.table.DefaultTableModel;
 public class MainView extends javax.swing.JFrame {
 
     private DefaultTableModel model;
-    private JLabel lbID;
+    private JLabel lbTitulo;
     private JLabel lbMemoria;
     private JLabel lbNombre;
     private JLabel lbInstante;
     private JLabel lbDuracion;
     private JLabel lbTabla;
-    private JTextField tfID;
+    private JLabel lbTamañoMemoria;
     private JTextField tfMemoria;
     private JTextField tfNombre;
     private JTextField tfInstante;
     private JTextField tfDuracion;
     private JButton btnAgregarProceso;
+    private JButton btnSimular;
     private JTable tabla;
     private JScrollPane scrollPane;
 
@@ -119,9 +120,7 @@ public class MainView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El tamaño del sistema operativo es mayor al de la memoria, por favor ingrese un tamaño menor.", "Memoria Insuficiente", JOptionPane.WARNING_MESSAGE);
             }
         }
-
         PopUpAgregarProceso(sim, model);
-
     }//GEN-LAST:event_btnNuevaSimulacionActionPerformed
 
     private int PopUpTamañoMemoria() {
@@ -159,50 +158,33 @@ public class MainView extends javax.swing.JFrame {
         return tamañoSO;
     }
 
-    public void PopUpAgregarProceso(Simulator simulator, DefaultTableModel model) {
-
-        model.addColumn("ID");
-        model.addColumn("Memoria KB");
-        model.addColumn("Nombre");
-        model.addColumn("Instante de llegada");
-        model.addColumn("Duración");
+    public void PopUpAgregarProceso(Simulator sim, DefaultTableModel model) {
 
         JFrame ventana = new JFrame();
         ventana.setVisible(true);
-        ventana.setTitle("Agregar Proceso");
-        ventana.setSize(500, 500);
+        ventana.setTitle("Agregar Procesos");
+        ventana.setSize(450, 700);
         ventana.setLayout(null);
 
-        lbTabla = new JLabel("Tabla de procesos:");
-        lbTabla.setBounds(20, 270, 130, 20);
-        ventana.getContentPane().add(lbTabla);
-        scrollPane = new JScrollPane(tabla);
-        scrollPane.setBounds(20, 300, 400, 200);
-        ventana.getContentPane().add(scrollPane);
-
-        lbID = new JLabel("ID:");
-        lbID.setBounds(20, 30, 80, 30);
-        ventana.getContentPane().add(lbID);
-
-        tfID = new JTextField();
-        tfID.setBounds(110, 30, 150, 30);
-        ventana.getContentPane().add(tfID);
-
-        lbMemoria = new JLabel("Memoria (KB):");
-        lbMemoria.setBounds(20, 70, 80, 30);
-        ventana.getContentPane().add(lbMemoria);
-
-        tfMemoria = new JTextField();
-        tfMemoria.setBounds(110, 70, 150, 30);
-        ventana.getContentPane().add(tfMemoria);
+        lbTitulo = new JLabel("Ingrese la informacion del proceso:");
+        lbTitulo.setBounds(20, 25, 300, 50);
+        ventana.getContentPane().add(lbTitulo);
 
         lbNombre = new JLabel("Nombre:");
-        lbNombre.setBounds(20, 110, 80, 30);
+        lbNombre.setBounds(20, 70, 80, 30);
         ventana.getContentPane().add(lbNombre);
 
         tfNombre = new JTextField();
-        tfNombre.setBounds(110, 110, 150, 30);
+        tfNombre.setBounds(110, 70, 150, 30);
         ventana.getContentPane().add(tfNombre);
+
+        lbMemoria = new JLabel("Memoria (KB):");
+        lbMemoria.setBounds(20, 110, 80, 30);
+        ventana.getContentPane().add(lbMemoria);
+
+        tfMemoria = new JTextField();
+        tfMemoria.setBounds(110, 110, 150, 30);
+        ventana.getContentPane().add(tfMemoria);
 
         lbInstante = new JLabel("Instante de llegada:");
         lbInstante.setBounds(20, 150, 120, 30);
@@ -216,41 +198,83 @@ public class MainView extends javax.swing.JFrame {
         lbDuracion.setBounds(20, 190, 80, 30);
         ventana.getContentPane().add(lbDuracion);
 
+        lbTamañoMemoria = new JLabel("Tamaño de la memoria: " + sim.memory.sizeInKilobytes + " KB");
+        lbTamañoMemoria.setBounds(20, 520, 250, 30);
+        ventana.getContentPane().add(lbTamañoMemoria);
+
         tfDuracion = new JTextField();
         tfDuracion.setBounds(110, 190, 150, 30);
         ventana.getContentPane().add(tfDuracion);
+
+        model.addColumn("Nombre");
+        model.addColumn("Memoria KB");
+        model.addColumn("Instante de llegada");
+        model.addColumn("Duración");
+
+        lbTabla = new JLabel("Tabla de procesos:");
+        lbTabla.setBounds(20, 280, 130, 20);
+        ventana.getContentPane().add(lbTabla);
+        scrollPane = new JScrollPane(tabla);
+        scrollPane.setBounds(20, 310, 400, 200);
+        ventana.getContentPane().add(scrollPane);
+
+        btnSimular = new JButton("Iniciar Simulación");
+        btnSimular.setBounds(140, 580, 150, 30);
+        ventana.getContentPane().add(btnSimular);
+        btnSimular.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
 
         btnAgregarProceso = new JButton("Agregar Proceso");
         btnAgregarProceso.setBounds(140, 240, 150, 30);
         ventana.getContentPane().add(btnAgregarProceso);
         btnAgregarProceso.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                agregarProceso(simulator);
+                boolean validacion = true;
+                int memoria = 0;
+                int instante = 0;
+                int duracion = 0;
+                if (ValidarNumero(tfMemoria.getText())) {
+                    memoria = Integer.parseInt(tfMemoria.getText());
+                } else {
+                    validacion = false;
+                }
+                if (ValidarNumero(tfInstante.getText())) {
+                    instante = Integer.parseInt(tfInstante.getText());
+                } else {
+                    validacion = false;
+                }
+                if (ValidarNumero(tfDuracion.getText())) {
+                    duracion = Integer.parseInt(tfDuracion.getText());
+                } else {
+                    validacion = false;
+                }
+                String nombre = tfNombre.getText();
 
-                int opcion = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro proceso?", "Confirmación", JOptionPane.YES_NO_OPTION);
-                if (opcion == JOptionPane.YES_OPTION) {
-                    tfID.setText("");
+                if (validacion) {
+                    sim.addProcess(memoria, nombre, instante, duracion);
+                    model.addRow(new Object[]{nombre, memoria, instante, duracion});
+                    repaint();
                     tfMemoria.setText("");
                     tfNombre.setText("");
                     tfInstante.setText("");
                     tfDuracion.setText("");
-                } else {
-                    ventana.dispose();
                 }
-
             }
         });
     }
 
-    private void agregarProceso(Simulator simulator) {
-        int id = Integer.parseInt(tfID.getText());
-        int memoria = Integer.parseInt(tfMemoria.getText());
-        String nombre = tfNombre.getText();
-        int instante = Integer.parseInt(tfInstante.getText());
-        int duracion = Integer.parseInt(tfDuracion.getText());
-        simulator.addProcess(id, memoria, nombre, instante, duracion);
-        model.addRow(new Object[]{id, memoria, nombre, instante, duracion});
-        repaint();
+    private boolean ValidarNumero(String cadena) {
+        boolean numeroValido = false;
+        int numero = 0;
+        try {
+            numero = Integer.parseInt(cadena);
+            numeroValido = true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Verificar que solo ingrese numeros en los campos de memoria, instante y duracion.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return numeroValido;
     }
 
     /**
