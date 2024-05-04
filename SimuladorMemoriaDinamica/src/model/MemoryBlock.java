@@ -5,6 +5,9 @@
 package model;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,18 +19,18 @@ public class MemoryBlock {
     int id;
     public int sizeInKilobytes;
     int internalFragmentationInKilobytes;
-    public ArrayList<Process> storedProcesses;
+    public ArrayList<model.Process> storedProcesses;
 
     public MemoryBlock(int id, int sizeInKilobytes) {
         this.id = id;
         this.sizeInKilobytes = sizeInKilobytes;
-        this.storedProcesses = new ArrayList<Process>();
+        this.storedProcesses = new ArrayList<model.Process>();
         this.internalFragmentationInKilobytes=0;
     }
     public void updateinternalFragmentation(){
         int fragmentation=0;
         for(Process iterator:storedProcesses){
-            fragmentation=+iterator.sizeInKylobytes;
+            fragmentation=+iterator.sizeInKilobytes;
         }
         this.internalFragmentationInKilobytes = (sizeInKilobytes-fragmentation);
     }
@@ -70,12 +73,27 @@ public class MemoryBlock {
         Iterator<Process> iterator=storedProcesses.iterator();
         while(iterator.hasNext()){
             Process processIterator=iterator.next();
-            json=json+processIterator.toJson();
+            if(processIterator!=null){
+                json=json+processIterator.toJson();
+            }
             if(iterator.hasNext()){
                 json=json+",";
             }
         }
         json=json+"]}";
         return json;
+    }
+    
+    public void loadFromJson(JsonArray storedProcessesJson){
+        model.Process iterator=null;
+        for (JsonElement obj : storedProcessesJson) {
+            JsonObject gsonObj = obj.getAsJsonObject();
+            if(gsonObj.get("sizeInKilobytes")!=null && gsonObj.get("name")!=null && gsonObj.get("arryvalInstant")!=null && gsonObj.get("durationInInstants")!=null && gsonObj.get("initInstant")!=null){
+                iterator=new model.Process(gsonObj.get("sizeInKilobytes").getAsInt(),gsonObj.get("name").getAsString(),gsonObj.get("arryvalInstant").getAsInt(),gsonObj.get("durationInInstants").getAsInt());
+                iterator.initInstant=gsonObj.get("initInstant").getAsInt();
+            }
+            this.storedProcesses.add(iterator);
+            
+        }
     }
 }

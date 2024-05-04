@@ -4,6 +4,9 @@
  */
 package model;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -56,16 +59,16 @@ public class Memory {
     public Boolean insertProcess(Process newProcess) {
         Boolean newProcessIsStored = false;
         newProcess.initInstant=currentInstant;
-        System.out.println(totalInternalFragmentationInKilobytes-newProcess.sizeInKylobytes);
-        if (newProcess.sizeInKylobytes <= totalInternalFragmentationInKilobytes) {
+        System.out.println(totalInternalFragmentationInKilobytes-newProcess.sizeInKilobytes);
+        if (newProcess.sizeInKilobytes <= totalInternalFragmentationInKilobytes) {
             for (MemoryBlock iterator : memoryBlocks) {
-                if (newProcess.sizeInKylobytes <= iterator.internalFragmentationInKilobytes) {
+                if (newProcess.sizeInKilobytes <= iterator.internalFragmentationInKilobytes) {
                     insertProcessInMemoryBlock(newProcess, memoryBlocks.indexOf(iterator));
                     newProcessIsStored = true;
                     break;
                 }
             }
-        }else if (newProcess.sizeInKylobytes <= freeSpaceInKilobytes) {
+        }else if (newProcess.sizeInKilobytes <= freeSpaceInKilobytes) {
             addMemoryBlock(newProcess);
             newProcessIsStored = true;
         }
@@ -74,10 +77,10 @@ public class Memory {
     }
 
     public void addMemoryBlock(Process newProcess) {
-        MemoryBlock newMemoryBlock = new MemoryBlock(memoryBlocks.size(), newProcess.sizeInKylobytes);
+        MemoryBlock newMemoryBlock = new MemoryBlock(memoryBlocks.size(), newProcess.sizeInKilobytes);
         newMemoryBlock.insertProcess(newProcess);
         memoryBlocks.add(newMemoryBlock);
-        freeSpaceInKilobytes = freeSpaceInKilobytes - newProcess.sizeInKylobytes;
+        freeSpaceInKilobytes = freeSpaceInKilobytes - newProcess.sizeInKilobytes;
     }
 
     public void insertProcessInMemoryBlock(Process newProcess, int memoryBlockId) {
@@ -110,5 +113,18 @@ public class Memory {
         json=json+"]}";
     
     return json;
+    }
+    
+    public void loadFromJson(JsonArray memoryBlocksJson){
+        MemoryBlock iterator=null;
+        for (JsonElement obj : memoryBlocksJson) {            
+            JsonObject gsonObj = obj.getAsJsonObject();
+            if(gsonObj.get("internalFragmentationInKilobytes")!=null && gsonObj.get("id")!=null && gsonObj.get("sizeInKilobytes")!=null){
+                iterator=new MemoryBlock(gsonObj.get("id").getAsInt(),gsonObj.get("sizeInKilobytes").getAsInt());
+                iterator.internalFragmentationInKilobytes=gsonObj.get("internalFragmentationInKilobytes").getAsInt();
+                iterator.loadFromJson(gsonObj.get("storedProcesses").getAsJsonArray());
+            }
+            this.memoryBlocks.add(iterator);
+        }
     }
 }

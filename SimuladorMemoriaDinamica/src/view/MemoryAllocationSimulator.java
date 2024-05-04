@@ -55,7 +55,7 @@ public class MemoryAllocationSimulator extends JFrame {
 
             for (Process process : memoryBlock.storedProcesses) {
                 JLabel processLabel = new JLabel("Nombre Proceso: " + process.name + " - Size: "
-                        + process.sizeInKylobytes + "KB - Init Instant: " + process.initInstant);
+                        + process.sizeInKilobytes + "KB - Init Instant: " + process.initInstant);
                 memoryBlocksPane.add(processLabel);
             }
         }

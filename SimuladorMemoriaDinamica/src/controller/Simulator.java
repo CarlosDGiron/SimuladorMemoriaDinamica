@@ -6,6 +6,10 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ public class Simulator {
     
     public Simulator(int memorySizeInKilobytes){
         memory=new Memory(memorySizeInKilobytes);
-        simulationSaveFileName="Prueba.json";
+        simulationSaveFileName="Prueba1.json";
         memoryInstantList = new ArrayList<model.Memory>();
         pendingProcessList = new ArrayList<model.Process>();
         jsonData="[";
@@ -45,23 +49,19 @@ public class Simulator {
     }
     
     public boolean simulate(){
-        Memory  iterator= new Memory(0);
-        checkSpaceForPendingProcess();
         memory.fordwardInstant();
         checkSpaceForPendingProcess();
-        iterator=memory;
-        memoryInstantList.add(iterator);
         if(memory.isEmpty()){
             if(!pendingProcessList.isEmpty()){
-                jsonData=","+jsonData+memory.toJson();
+                jsonData=jsonData+","+memory.toJson();
                 return true;
             }else{
-                jsonData=","+jsonData+memory.toJson()+"]";
+                jsonData=jsonData+","+memory.toJson()+"]";
                 saveInJson();
                 return false;
             }
         }else{
-            jsonData=","+jsonData+memory.toJson();
+            jsonData=","+jsonData+","+memory.toJson();
             return true;
         }
     }
@@ -91,5 +91,25 @@ public class Simulator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void loadFromJson(String jsonData){
+        this.memoryInstantList=new ArrayList();
+        Memory iterator;
+        JsonParser parser=new JsonParser();
+        JsonArray memoriesJson = parser.parse(jsonData).getAsJsonArray();
+        for (JsonElement obj : memoriesJson) {            
+            JsonObject gsonObj = obj.getAsJsonObject();
+            iterator=new Memory(gsonObj.get("sizeInKilobytes").getAsInt());
+            iterator.currentInstant=gsonObj.get("currentInstant").getAsInt();
+            iterator.sizeInKilobytes=gsonObj.get("sizeInKilobytes").getAsInt();
+            iterator.totalInternalFragmentationInKilobytes=gsonObj.get("totalInternalFragmentationInKilobytes").getAsInt();
+            iterator.loadFromJson(gsonObj.get("memoryBlocks").getAsJsonArray());
+            this.memoryInstantList.add(iterator);
+        }
+        for (Memory iteratorMemoryList : memoryInstantList) {
+            System.out.println(iteratorMemoryList.toJson());
+        }
+        
     }
 }

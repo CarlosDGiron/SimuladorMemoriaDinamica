@@ -223,6 +223,8 @@ public class MainView extends javax.swing.JFrame {
         ventana.getContentPane().add(btnSimular);
         btnSimular.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                while(sim.simulate()){
+                }
             }
         });
 
